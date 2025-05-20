@@ -141,7 +141,7 @@ const Testimonials = () => {
                       "{testimonials[currentTestimonial].quote}"
                     </p>
                   </div>
-                  <div className="flex items-center pt-4 border-t border-gray-200 mt-auto"> {/* Added mt-auto */}
+                  <div className="flex items-center pt-4  mt-auto"> {/* Added mt-auto */}
                     <div className="h-px bg-gray-200 flex-1"></div>
                     <span className="px-3 sm:px-4 text-xs sm:text-sm text-gray-500">
                       {currentTestimonial + 1}/{testimonials.length}

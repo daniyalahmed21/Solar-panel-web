@@ -45,7 +45,7 @@ const Hero = () => {
 
   return (
     // Changed section background to a warmer gradient
-    <section id="home" className="relative min-h-screen pt-32 pb-20 md:pb-32 overflow-hidden bg-gradient-to-br ">
+    <section id="home" className="relative min-h-screen pt-32   overflow-hidden bg-gradient-to-br ">
       {/* Adjusted background decorations for warmer theme */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-orange-100 to-yellow-100 rounded-full filter blur-[100px] opacity-25 -z-10"></div>
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-gradient-to-tr from-yellow-100 to-red-100 rounded-full filter blur-[100px] opacity-25 -z-10"></div>
