@@ -17,7 +17,7 @@ function App() {
       <main className="flex-grow">
         <Hero />
         
-        <div className="max-w-6xl mx-auto  md:py-20 space-y-20  ">
+        <div className="max-w-6xl mx-auto  md:py-20 space-y-20 overflow-x-hidden  ">
           <Benefits />
           <Products />
           <HowItWorks />

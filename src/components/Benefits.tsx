@@ -109,7 +109,7 @@ const Benefits = () => {
 
 
   return (
-    <section id="benefits" className="">
+    <section id="benefits" className="px-8 overflow-x-hidden ">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
           className="text-center mb-16 md:mb-20"
