@@ -107,7 +107,7 @@ const Products = () => {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <div className="bg-white rounded-3xl overflow-hidden shadow-2xl h-full border border-gray-200/80">
+            <div className="bg-white rounded-3xl overflow-hidden shadow-xl h-full border border-gray-200/80">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`showcase-${activeProduct.id}`}
