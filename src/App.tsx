@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-gray-50 text-gray-800 antialiased">
+    <div className="min-h-screen flex flex-col font-sans bg-gradient-to-br bg-white text-gray-800 antialiased">
       {/* Header */}
       <Header />
       

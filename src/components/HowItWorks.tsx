@@ -2,38 +2,39 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Lightbulb, Home, Sun, BarChart3, ArrowRight } from 'lucide-react';
 
+// Updated step information for SUNFINITY in Karachi/Pakistan
 const steps = [
   {
     icon: Lightbulb,
-    title: 'Consultation',
-    description: 'Our experts assess your energy needs and design a custom solar solution.',
-    color: 'text-yellow-500',
-    bgColor: 'bg-yellow-100',
-    borderColor: 'border-yellow-300'
+    title: '1. Consultation & Design',
+    description: 'Our experts assess your energy needs, site suitability, and design a custom solar solution tailored for your Karachi home or business.',
+    color: 'text-orange-600',    // Using orange as a primary accent
+    bgColor: 'bg-orange-100',
+    borderColor: 'border-orange-500' // Accent border color
   },
   {
-    icon: Home,
-    title: 'Installation',
-    description: 'Professional installation by our certified technicians, typically in just 1-2 days.',
-    color: 'text-blue-500',
+    icon: Home, // Using Home icon for installation, Wrench could also work
+    title: '2. Professional Installation',
+    description: 'Our certified technicians handle the complete installation professionally, typically within 1-2 days, ensuring minimal disruption.',
+    color: 'text-blue-600',     // Kept varied colors for step distinction
     bgColor: 'bg-blue-100',
-    borderColor: 'border-blue-300'
+    borderColor: 'border-blue-500'
   },
   {
     icon: Sun,
-    title: 'Activation',
-    description: 'Your system is connected to the grid and activated to start generating clean energy.',
-    color: 'text-green-500',
+    title: '3. System Activation',
+    description: 'Your new solar system is seamlessly connected, configured with K-Electric for net metering (if applicable), and activated to start generating clean energy.',
+    color: 'text-green-600',
     bgColor: 'bg-green-100',
-    borderColor: 'border-green-300'
+    borderColor: 'border-green-500'
   },
   {
     icon: BarChart3,
-    title: 'Monitor & Save',
-    description: 'Track your energy production and watch your savings grow month after month.',
-    color: 'text-purple-500',
+    title: '4. Monitor, Save & Support',
+    description: 'Track your energy production and watch your savings grow. Plus, enjoy peace of mind with our direct 10-year panel warranty support.',
+    color: 'text-purple-600',
     bgColor: 'bg-purple-100',
-    borderColor: 'border-purple-300'
+    borderColor: 'border-purple-500'
   }
 ];
 
@@ -43,171 +44,129 @@ const HowItWorks = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2
+        staggerChildren: 0.2, // Slightly adjusted stagger
+        delayChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: { 
         type: "spring", 
-        stiffness: 80,
-        damping: 15,
-        duration: 0.8
+        stiffness: 100, // Adjusted spring
+        damping: 18,
+      }
+    }
+  };
+  
+  const lineVariants = { // For the central timeline line
+    hidden: { height: 0, opacity: 0 },
+    visible: {
+      height: "100%", // Animate height from 0 to 100%
+      opacity: 1,
+      transition: {
+        duration: 0.8 * steps.length * 0.3, // Match overall stagger
+        ease: [0.16, 1, 0.3, 1],
+        delay: 0.3 // Delay slightly for items to start appearing
       }
     }
   };
 
-  const numberVariants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 150,
-        damping: 10,
-        delay: 0.4
-      }
-    }
-  };
-
-  const lineVariants = {
-    hidden: { scaleY: 0, opacity: 0 },
-    visible: {
-      scaleY: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1]
-      }
-    }
-  };
 
   return (
-    <section id="process" className="py-16 md:py-32">
+    <section id="process" className="py-20 md:py-28 bg-white"> {/* Section bg to white for card pop */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <motion.div 
-          className="text-center mb-12 md:mb-24"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center mb-16 md:mb-20" // Increased bottom margin
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our Simple <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-500">4-Step Process</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            Our Simple <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500">4-Step Process</span> {/* Orange Gradient */}
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Transitioning to solar energy has never been easier with our streamlined approach
+            Transitioning to solar energy with SUNFINITY is seamless. Here’s how we power your journey to savings and sustainability in Karachi.
           </p>
         </motion.div>
 
-        {/* Timeline Steps */}
         <motion.div 
           className="relative"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, amount: 0.05 }} // Trigger slightly earlier
           variants={containerVariants}
         >
-          {/* Timeline Line - Hidden on mobile */}
-          <motion.div 
-            className="hidden md:block absolute top-0 left-1/2 h-full w-1 bg-gradient-to-b from-blue-200 via-blue-400 to-blue-200 transform -translate-x-1/2 z-0"
-            variants={lineVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          />
+          {/* Timeline Line - Desktop */}
+          <div className="hidden md:block absolute top-8 bottom-8 left-1/2 w-1 transform -translate-x-1/2 z-0"> {/* Adjusted top/bottom for better fit */}
+             <motion.div 
+                className="h-full w-full bg-gray-300 rounded-full" // Neutral gray line
+                variants={lineVariants} 
+             />
+          </div>
           
-          {/* Steps Container - Stacked on mobile */}
-          <div className="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-12 relative z-10">
+          <div className="flex flex-col md:space-y-0 space-y-8 relative z-10"> {/* md:space-y-0 to remove stacking space on desktop */}
             {steps.map((step, index) => {
-              const isEven = index % 2 === 0;
+              const isEvenMd = index % 2 === 0; // For potential zigzag, though current is grid
               return (
                 <motion.div 
-                  key={index} 
+                  key={step.title} 
                   variants={itemVariants}
-                  className="flex flex-col md:flex-row items-start"
+                  // For zigzag layout on desktop, add conditional classes for alignment:
+                  // className={`md:w-1/2 ${isEvenMd ? 'md:self-start md:pr-8' : 'md:self-end md:pl-8'}`}
+                  // For current simpler grid/stacking:
+                  className={`md:max-w-[calc(50%-1.5rem)] ${isEvenMd ? 'md:self-start' : 'md:self-end md:ml-auto'}`} // Simplified alternating for 2-col feel
                 >
-                  {/* Mobile Number Indicator - Above the card */}
-                  <div className="md:hidden flex items-center mb-3 w-full">
-                    <motion.div 
-                      className={`w-8 h-8 rounded-full ${step.bgColor} border-4 ${step.borderColor} shadow-md flex items-center justify-center mr-3`}
-                      variants={numberVariants}
-                    >
-                      <span className="font-bold text-gray-800">{index + 1}</span>
-                    </motion.div>
-                    <div className={`h-px flex-1 ${step.bgColor} bg-opacity-50`}></div>
+                  {/* Mobile Number/Indicator - Above card */}
+                  <div className="md:hidden flex items-center mb-3">
+                    <div className={`w-10 h-10 rounded-full ${step.bgColor} border-2 ${step.borderColor} shadow-md flex items-center justify-center mr-3`}>
+                      <span className={`font-bold text-lg ${step.color}`}>{index + 1}</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800">{step.title.substring(step.title.indexOf(" ") + 1)}</h3> {/* Title next to number */}
                   </div>
 
-                  {/* Step Card */}
-                  <div className="w-full">
-                    <motion.div 
-                      className={`${step.bgColor} rounded-xl md:rounded-2xl p-5 md:p-6 shadow-md md:shadow-lg border ${step.borderColor} hover:shadow-lg transition-all duration-300`}
-                      whileHover={{ y: -5 }}
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className={`inline-flex items-center justify-center rounded-full p-2 md:p-3 ${step.bgColor} shadow-sm`}>
-                          <step.icon className={`w-6 h-6 md:w-8 md:h-8 ${step.color}`} />
-                        </div>
-                        <div>
-                          <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-1 md:mb-2">{step.title}</h3>
-                          <p className="text-sm md:text-base text-gray-700">{step.description}</p>
-                        </div>
+                  {/* Step Card - Redesigned */}
+                  <motion.div 
+                    className={`bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border-t-4 ${step.borderColor} w-full`}
+                    whileHover={{ y: -6, scale: 1.02 }}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className={`hidden md:inline-flex items-center justify-center rounded-lg p-3 ${step.bgColor} shadow-md`}> {/* Icon bg color from step */}
+                        <step.icon className={`w-8 h-8 ${step.color}`} /> {/* Icon color from step */}
                       </div>
-                    </motion.div>
-                  </div>
+                      <div className="flex-1">
+                        <h3 className="hidden md:block text-xl lg:text-2xl font-bold text-gray-800 mb-2">{step.title}</h3>
+                        <p className="text-sm sm:text-base text-gray-600 leading-relaxed">{step.description}</p>
+                      </div>
+                    </div>
+                  </motion.div>
                 </motion.div>
               );
             })}
           </div>
         </motion.div>
 
-        {/* CTA Section */}
         <motion.div 
-          className="mt-16 md:mt-24 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl md:rounded-2xl shadow-lg md:shadow-2xl overflow-hidden"
-          initial={{ opacity: 0, y: 40 }}
+          className="mt-20 md:mt-24 text-center"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
         >
-          <div className="p-6 md:p-8 lg:p-12 flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-2/3 mb-4 md:mb-0 md:pr-6 lg:pr-8">
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2 md:mb-4">Ready to Start Your Solar Journey?</h3>
-              <p className="text-sm md:text-base text-blue-100 mb-4 md:mb-6">
-                Schedule a free consultation with our solar experts to learn how much you can save with a custom solar solution.
-              </p>
-            </div>
-            <div className="w-full md:w-1/3 flex justify-center md:justify-end">
-              <motion.button 
-                className="bg-white text-blue-800 hover:bg-blue-50 px-6 py-3 md:px-8 md:py-4 rounded-lg transition-all duration-300 font-medium md:font-semibold shadow-md hover:shadow-lg flex items-center text-sm md:text-base"
-                whileHover={{ 
-                  y: -3, 
-                  scale: 1.02,
-                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
-                }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Get Started
-                <motion.span
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ 
-                    repeat: Infinity,
-                    duration: 1.5,
-                    ease: "easeInOut"
-                  }}
-                >
-                  <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
-                </motion.span>
-              </motion.button>
-            </div>
-          </div>
+          <motion.button 
+            className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white px-10 py-4 rounded-full transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-orange-300/50 flex items-center justify-center mx-auto group"
+            whileHover={{ y: -3, scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            Schedule Your Free Consultation
+            <ArrowRight className="ml-2.5 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+          </motion.button>
         </motion.div>
       </div>
     </section>

@@ -1,221 +1,244 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Check, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, ArrowRight, Package, BatteryCharging as BatteryIcon } from "lucide-react"; // Building icon removed
 
-const products = [
+// Placeholder images
+const RESIDENTIAL_IMG_PLACEHOLDER = "https://placehold.co/600x400/E2E8F0/4A5568?text=Home+Solar";
+const BATTERY_IMG_PLACEHOLDER = "https://placehold.co/600x400/E2E8F0/4A5568?text=Solar+Battery";
+
+// Updated productsData: "Pro Solution" (Commercial & Industrial) removed
+const productsData = [
   {
     id: 1,
-    name: "SolarPrime Residential",
-    description: "Our flagship residential solar panel system, perfect for homes of all sizes.",
-    image: "https://images.pexels.com/photos/8853536/pexels-photo-8853536.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    name: "SUNFINITY Home Solution",
+    icon: Package,
+    description: "Tailored solar solutions for homes of all sizes in Karachi, maximizing savings and energy independence.",
+    image: RESIDENTIAL_IMG_PLACEHOLDER,
     features: [
-      "High-efficiency monocrystalline panels",
-      "Sleek, low-profile design",
-      "22% energy conversion rate",
-      "Weather-resistant construction",
-      "Integrated monitoring system",
-      "25-year warranty"
-    ]
+      "High-efficiency solar panels (585W commonly used)",
+      "Sleek, aesthetically pleasing installation",
+      "Optimized energy conversion performance",
+      "Durable, weather-resistant construction for local conditions",
+      "Smart energy monitoring system included",
+      "10-Year Panel Warranty (claims handled directly by us)",
+    ],
   },
+  // SUNFINITY Pro Solution removed
   {
-    id: 2,
-    name: "SolarMax Commercial",
-    description: "Powerful commercial solution for businesses looking to reduce operational costs.",
-    image: "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    id: 3, // Keeping original ID for key stability if it matters, or re-index to 2
+    name: "SUNFINITY PowerBank",
+    icon: BatteryIcon,
+    description: "Advanced battery storage for uninterrupted power, ensuring energy security during K-Electric outages.",
+    image: BATTERY_IMG_PLACEHOLDER,
     features: [
-      "Industrial-grade panel construction",
-      "Scalable system design",
-      "25% energy conversion rate",
-      "Enhanced durability for commercial settings",
-      "Advanced monitoring and analytics",
-      "25-year warranty with business support"
-    ]
+      "Various capacities available (e.g., 200Ah, 300Ah options)",
+      "Provides approx. 4 hours backup on typical full load",
+      "Seamless power transition during outages",
+      "Smart energy management for optimal use",
+      "Compact design with professional installation",
+      "10-Year Battery Warranty",
+    ],
   },
-  {
-    id: 3,
-    name: "PowerStore Battery",
-    description: "Advanced battery storage system to maximize your solar investment.",
-    image: "https://images.pexels.com/photos/414837/pexels-photo-414837.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    features: [
-      "13.5 kWh storage capacity",
-      "Seamless power backup during outages",
-      "Smart power management system",
-      "Compact, wall-mounted design",
-      "Real-time energy monitoring",
-      "10-year warranty"
-    ]
-  }
 ];
 
+const whyChooseSunfinity = [
+  "Top-Tier, High-Efficiency Solar Technology",
+  "Expertly Engineered for Pakistani Climate",
+  "User-Friendly Smart Energy Monitoring",
+  "Direct 10-Year Panel Warranty & Support",
+  "Complete Turnkey Project Management",
+  "Dedicated Local Installation Teams",
+];
+
+
 const Products = () => {
-  const [activeProduct, setActiveProduct] = useState(products[0]);
+  // Ensure productsData is not empty before accessing productsData[0]
+  const [activeProduct, setActiveProduct] = useState(productsData.length > 0 ? productsData[0] : null);
+
+  const cardVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    exit: { opacity: 0, y: -20, transition: { duration: 0.3, ease: "easeIn" } }
+  };
+  
+  if (!activeProduct) {
+    // Fallback or loading state if productsData could be empty
+    // Though in this case, it's hardcoded with items
+    return <section id="products" className="py-20 md:py-28 text-center">Loading products...</section>;
+  }
 
   return (
-    <section id="products" className="py-20 ">
+    // Updated section background to match Hero section
+    <section id="products" className="py-20 md:py-28 ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16 md:mb-20"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-500">Solar Solutions</span>
+            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500">Solar Solutions</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover our range of cutting-edge solar products designed to meet your energy needs
+            Explore SUNFINITY's range of cutting-edge solar products and complete installation services, designed for Pakistan's energy needs.
           </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-8 xl:gap-12">
+        <div className="flex flex-col lg:flex-row gap-10 xl:gap-16">
           {/* Product Showcase */}
           <motion.div
-            className="w-full lg:w-1/2"
+            className="w-full lg:w-[55%]"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <div className="bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-100 h-full">
-              <motion.div
-                key={`image-${activeProduct.id}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="relative h-64 sm:h-80 md:h-96"
-              >
-                <img
-                  src={activeProduct.image}
-                  alt={activeProduct.name}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                  <motion.h3
-                    key={`title-${activeProduct.id}`}
-                    className="text-2xl md:text-3xl font-bold text-white mb-2"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    {activeProduct.name}
-                  </motion.h3>
-                </div>
-              </motion.div>
-
-              <div className="p-6 md:p-8">
-                <motion.p
-                  key={`desc-${activeProduct.id}`}
-                  className="text-gray-700 mb-6"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                >
-                  {activeProduct.description}
-                </motion.p>
-
+            <div className="bg-white rounded-3xl overflow-hidden shadow-2xl h-full border border-gray-200/80"> {/* Changed bg to white for better contrast with new section bg */}
+              <AnimatePresence mode="wait">
                 <motion.div
-                  key={`features-${activeProduct.id}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
+                  key={`showcase-${activeProduct.id}`}
+                  variants={cardVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
                 >
-                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Key Features:</h4>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {activeProduct.features.map((feature, index) => (
-                      <motion.li
-                        key={index}
-                        className="flex items-start bg-gray-50 rounded-lg p-3"
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
+                  <div className="relative h-64 sm:h-80 md:h-96 xl:h-[28rem]">
+                    <img
+                      src={activeProduct.image}
+                      alt={activeProduct.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 md:p-8 flex flex-col justify-end">
+                      <motion.h3
+                        key={`title-${activeProduct.id}`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.1, ease:"easeOut" }}
+                        className="text-2xl md:text-3xl xl:text-4xl font-bold text-white mb-1 md:mb-2"
                       >
-                        <div className="bg-green-100 rounded-full p-1 mr-3 flex-shrink-0">
-                          <Check className="h-4 w-4 text-green-600" />
-                        </div>
-                        <span className="text-gray-700">{feature}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
+                        {activeProduct.name}
+                      </motion.h3>
+                    </div>
+                  </div>
 
-                <motion.div
-                  className="mt-8"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  <motion.button 
-                    className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-8 py-3 rounded-lg transition-all duration-300 font-medium shadow-md hover:shadow-lg flex items-center"
-                    whileHover={{ y: -3, scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Learn More
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </motion.button>
+                  <div className="p-6 md:p-8">
+                    <motion.p
+                      key={`desc-${activeProduct.id}`}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.2, ease:"easeOut" }}
+                      className="text-gray-700 mb-6 md:mb-8 text-base md:text-lg leading-relaxed"
+                    >
+                      {activeProduct.description}
+                    </motion.p>
+
+                    <motion.div
+                      key={`features-${activeProduct.id}`}
+                      initial="hidden"
+                      animate="visible"
+                      variants={{
+                        visible: { transition: { staggerChildren: 0.07 } },
+                        hidden: {}
+                      }}
+                    >
+                      <h4 className="text-lg md:text-xl font-semibold text-gray-800 mb-4">Key Features:</h4>
+                      <ul className="space-y-3">
+                        {activeProduct.features.map((feature, index) => (
+                          <motion.li
+                            key={index}
+                            className="flex items-center"
+                            variants={{hidden: {opacity:0, x:-20}, visible: {opacity:1, x:0}}}
+                          >
+                            <div className="bg-green-500 rounded-full p-1 mr-3 flex-shrink-0">
+                              <Check className="h-4 w-4 text-white" />
+                            </div>
+                            <span className="text-gray-700 text-sm md:text-base">{feature}</span>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.div>
+
+                    <motion.div
+                      className="mt-8 md:mt-10"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.4 + (activeProduct.features.length * 0.07) }}
+                    >
+                      <motion.button 
+                        className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white px-8 py-3 rounded-lg transition-all duration-300 font-semibold shadow-lg hover:shadow-orange-300/50 flex items-center text-base md:text-lg group"
+                        whileHover={{ y: -3, scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                      >
+                        Learn More
+                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </motion.button>
+                    </motion.div>
+                  </div>
                 </motion.div>
-              </div>
+              </AnimatePresence>
             </div>
           </motion.div>
 
           {/* Product Selector */}
           <motion.div
-            className="w-full lg:w-1/2"
+            className="w-full lg:w-[45%]"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
           >
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8 h-full">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-                Explore Our Products
+            {/* Changed bg to white for better contrast with new section bg */}
+            <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 h-full border border-gray-200/80">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8">
+                Our Product Range
               </h3>
 
-              <div className="space-y-4 mb-8">
-                {products.map((product) => (
-                  <motion.div
+              <div className="space-y-4 mb-8 md:mb-10">
+                {productsData.map((product) => (
+                  <motion.button
                     key={product.id}
-                    className={`p-5 rounded-xl cursor-pointer transition-all duration-300 ${
-                      activeProduct.id === product.id
-                        ? "bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-600 shadow-md"
-                        : "bg-gray-50 hover:bg-gray-100"
-                    }`}
+                    className={`w-full p-4 md:p-5 rounded-xl text-left transition-all duration-300 ease-in-out border-2 
+                      ${ activeProduct.id === product.id
+                          ? "bg-orange-500 text-white border-orange-600 shadow-lg"
+                          : "bg-white hover:bg-gray-100 border-gray-200 hover:border-gray-300"
+                      }`}
                     onClick={() => setActiveProduct(product)}
-                    whileHover={{ x: 5 }}
+                    whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <h4 className="font-bold text-lg text-gray-900 mb-1">
-                      {product.name}
-                    </h4>
-                    <p className="text-gray-600">
-                      {product.description}
+                    <div className="flex items-center mb-1.5">
+                      <product.icon className={`w-6 h-6 mr-3 flex-shrink-0 ${activeProduct.id === product.id ? 'text-white' : 'text-orange-500'}`} />
+                      <h4 className={`font-semibold text-lg md:text-xl ${activeProduct.id === product.id ? 'text-white' : 'text-gray-800'}`}>
+                        {product.name}
+                      </h4>
+                    </div>
+                    <p className={`text-sm md:text-base ${activeProduct.id === product.id ? 'text-orange-100' : 'text-gray-600'}`}>
+                      {product.description.length > 80 ? product.description.substring(0, 80) + "..." : product.description}
                     </p>
-                  </motion.div>
+                  </motion.button>
                 ))}
               </div>
 
-              <div className="bg-blue-50 rounded-xl p-6">
-                <h4 className="text-xl font-semibold text-gray-900 mb-4">
-                  Why Choose Our Products
+              <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200/80"> {/* Changed bg to lighter gray */}
+                <h4 className="text-xl font-semibold text-gray-800 mb-4">
+                  Why Choose SUNFINITY?
                 </h4>
                 <ul className="space-y-3">
-                  {[
-                    "Industry-leading efficiency ratings",
-                    "Designed for extreme weather conditions",
-                    "Smart monitoring via our mobile app",
-                    "Comprehensive warranty coverage"
-                  ].map((item, index) => (
+                  {whyChooseSunfinity.map((item, index) => (
                     <motion.li
                       key={index}
-                      className="flex items-start"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                      viewport={{ once: true }}
+                      className="flex items-center"
+                      initial={{ opacity: 0, x: -15 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                      viewport={{ once: true, amount:0.5 }}
                     >
-                      <div className="bg-green-100 rounded-full p-1 mr-3 mt-1">
-                        <Check className="h-4 w-4 text-green-600" />
+                      <div className="bg-green-500 rounded-full p-1 mr-3 flex-shrink-0">
+                        <Check className="h-4 w-4 text-white" />
                       </div>
-                      <p className="text-gray-700">{item}</p>
+                      <p className="text-gray-700 text-sm md:text-base">{item}</p>
                     </motion.li>
                   ))}
                 </ul>
