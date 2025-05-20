@@ -9,8 +9,8 @@ const Hero = () => {
 
   // keyStats updated with LATEST owner-provided information
   const keyStats = [
-    { icon: <DollarSign className="w-6 h-6 text-green-600" />, value: "Avg. 50%", label: "Bill Reduction", bg: "bg-green-100" },
-    { icon: <Shield className="w-6 h-6 text-blue-600" />, value: "10-Year", label: "Panel Warranty", bg: "bg-blue-100" },
+    { icon: <DollarSign className="w-6 h-6 text-green-600" />, value: "Avg 50%", label: "Bill Reduction", bg: "bg-green-100" },
+    { icon: <Shield className="w-6 h-6 text-blue-600" />, value: "10 Year", label: "Panel Warranty", bg: "bg-blue-100" },
     { icon: <Wrench className="w-6 h-6 text-orange-600" />, value: "Expert", label: "Installation", bg: "bg-orange-100" }
   ];
 
@@ -29,7 +29,7 @@ const Hero = () => {
       id: 2,
       icon: <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />,
       label: "Panel Lifespan", // Distinct from warranty
-      value: "25+ Years",    // Panel's expected operational life
+      value: "10+ Years",    // Panel's expected operational life
       bgColor: "bg-blue-100",
       positionClasses: "-top-6 -right-6",
       delay: 1.2
