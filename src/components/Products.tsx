@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react"; // Added useEffect, useRef
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ArrowRight, Package, BatteryCharging as BatteryIcon } from "lucide-react"; // Building icon removed
+import { Check, ArrowRight, Package, BatteryCharging as BatteryIcon } from "lucide-react";
 
 // Placeholder images
 const RESIDENTIAL_IMG_PLACEHOLDER = "https://placehold.co/600x400/E2E8F0/4A5568?text=Home+Solar";
 const BATTERY_IMG_PLACEHOLDER = "https://placehold.co/600x400/E2E8F0/4A5568?text=Solar+Battery";
 
-// Updated productsData: "Pro Solution" (Commercial & Industrial) removed
 const productsData = [
   {
     id: 1,
@@ -23,9 +22,8 @@ const productsData = [
       "10-Year Panel Warranty (claims handled directly by us)",
     ],
   },
-  // SUNFINITY Pro Solution removed
   {
-    id: 3, // Keeping original ID for key stability if it matters, or re-index to 2
+    id: 3, 
     name: "SUNFINITY PowerBank",
     icon: BatteryIcon,
     description: "Advanced battery storage for uninterrupted power, ensuring energy security during K-Electric outages.",
@@ -52,8 +50,24 @@ const whyChooseSunfinity = [
 
 
 const Products = () => {
-  // Ensure productsData is not empty before accessing productsData[0]
   const [activeProduct, setActiveProduct] = useState(productsData.length > 0 ? productsData[0] : null);
+  
+  // Refs for scrolling logic
+  const showcaseRef = useRef<HTMLDivElement>(null);
+  const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false; // Set to false after initial mount
+    } else if (showcaseRef.current) {
+      // Only scroll on smaller screens where layout is stacked
+      if (window.innerWidth < 1024) { // Tailwind's default lg breakpoint
+        // Smooth scroll to the top of the showcase area
+        showcaseRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [activeProduct]); // Trigger effect when activeProduct changes
+
 
   const cardVariants = {
     initial: { opacity: 0, y: 20 },
@@ -62,14 +76,11 @@ const Products = () => {
   };
   
   if (!activeProduct) {
-    // Fallback or loading state if productsData could be empty
-    // Though in this case, it's hardcoded with items
     return <section id="products" className="py-20 md:py-28 text-center">Loading products...</section>;
   }
 
   return (
-    // Updated section background to match Hero section
-    <section id="products" className="py-20 md:py-28 ">
+    <section id="products" className="py-20 md:py-28"> {/* Section background as per your provided code (inherits page default) */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16 md:mb-20"
@@ -89,13 +100,14 @@ const Products = () => {
         <div className="flex flex-col lg:flex-row gap-10 xl:gap-16">
           {/* Product Showcase */}
           <motion.div
+            ref={showcaseRef} // Added ref for scrolling
             className="w-full lg:w-[55%]"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <div className="bg-white rounded-3xl overflow-hidden shadow-2xl h-full border border-gray-200/80"> {/* Changed bg to white for better contrast with new section bg */}
+            <div className="bg-white rounded-3xl overflow-hidden shadow-2xl h-full border border-gray-200/80">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`showcase-${activeProduct.id}`}
@@ -189,7 +201,6 @@ const Products = () => {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
           >
-            {/* Changed bg to white for better contrast with new section bg */}
             <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 h-full border border-gray-200/80">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8">
                 Our Product Range
@@ -204,7 +215,7 @@ const Products = () => {
                           ? "bg-orange-500 text-white border-orange-600 shadow-lg"
                           : "bg-white hover:bg-gray-100 border-gray-200 hover:border-gray-300"
                       }`}
-                    onClick={() => setActiveProduct(product)}
+                    onClick={() => setActiveProduct(product)} // setActiveProduct will trigger the useEffect
                     whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -221,7 +232,7 @@ const Products = () => {
                 ))}
               </div>
 
-              <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200/80"> {/* Changed bg to lighter gray */}
+              <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200/80">
                 <h4 className="text-xl font-semibold text-gray-800 mb-4">
                   Why Choose SUNFINITY?
                 </h4>

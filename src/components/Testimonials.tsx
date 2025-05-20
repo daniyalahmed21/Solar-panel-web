@@ -61,8 +61,8 @@ const Testimonials = () => {
   const slideDistance = 50;
 
   return (
-    <section id="testimonials" className="py-20 md:py-28 overflow-x-hidden"> {/* Kept light bg for section from prev. redesign */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="testimonials" className="py-20 md:py-28 overflow-x-hidden  "> {/* Kept light bg for section from prev. redesign */}
+      <div className="container  mx-auto px-8 sm:px-6 lg:px-8 z-50">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -210,7 +210,7 @@ const Testimonials = () => {
 
         {/* CTA Block with light background and orange gradient button */}
         <motion.div
-          className="mt-20 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200/70" // Light background for CTA block
+          className="mt-20 bg-white rounded-2xl sm:shadow-xl overflow-hidden border border-gray-200/70" // Light background for CTA block
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}

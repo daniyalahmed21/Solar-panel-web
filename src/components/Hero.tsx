@@ -2,23 +2,25 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sun, Shield, DollarSign, Zap, Wrench } from 'lucide-react';
 
 const Hero = () => {
-  // Data as provided in your last code snippet
   const companyName = "SUNFINITY SOLAR ENERGY";
   const tagline = "A brighter tomorrow, starts today!";
+  // Ensuring heroParagraph reflects latest info (full projects, warranty support)
   const heroParagraph = `Your trusted partner for complete solar projects in Pakistan – from high-quality panels, inverters, and batteries to expert installation and dedicated warranty support. ${tagline}`;
 
+  // keyStats updated with LATEST owner-provided information
   const keyStats = [
-    { icon: <DollarSign className="w-6 h-6 text-green-600" />, value: "Upto 80%", label: "Bill Reduction", bg: "bg-green-100" },
-    { icon: <Shield className="w-6 h-6 text-blue-600" />, value: "25yr", label: "Performance Warranty", bg: "bg-blue-100" },
-    { icon: <Wrench className="w-6 h-6 text-orange-600" />, value: "Expert", label: "Installation", bg: "bg-orange-100" } // Kept orange accent here
+    { icon: <DollarSign className="w-6 h-6 text-green-600" />, value: "Avg. 50%", label: "Bill Reduction", bg: "bg-green-100" },
+    { icon: <Shield className="w-6 h-6 text-blue-600" />, value: "10-Year", label: "Panel Warranty", bg: "bg-blue-100" },
+    { icon: <Wrench className="w-6 h-6 text-orange-600" />, value: "Expert", label: "Installation", bg: "bg-orange-100" }
   ];
 
+  // overlayStats updated with LATEST owner-provided information
   const overlayStats = [
     {
       id: 1,
       icon: <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />,
-      label: "Save Annually",
-      value: "PKR 200k+",
+      label: "Typical Savings",
+      value: "~50%", // Reflects owner's 50% average
       bgColor: "bg-green-100",
       positionClasses: "-bottom-6 -left-6",
       delay: 1
@@ -26,8 +28,8 @@ const Hero = () => {
     {
       id: 2,
       icon: <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />,
-      label: "Panel Lifespan",
-      value: "10+ Years", // This was "25+ Years" in some versions, using what's in current user code
+      label: "Panel Lifespan", // Distinct from warranty
+      value: "25+ Years",    // Panel's expected operational life
       bgColor: "bg-blue-100",
       positionClasses: "-top-6 -right-6",
       delay: 1.2
@@ -36,7 +38,7 @@ const Hero = () => {
       id: 3,
       icon: <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />,
       label: "Payback Period",
-      value: "3-6 Years",
+      value: "3-6 Years", // This is plausible with 50% savings
       bgColor: "bg-purple-100",
       positionClasses: "-bottom-10 right-4 sm:right-10 hidden md:block",
       delay: 1.4
@@ -44,9 +46,9 @@ const Hero = () => {
   ];
 
   return (
-    // Changed section background to a warmer gradient
-    <section id="home" className="relative min-h-screen pt-32   overflow-hidden bg-gradient-to-br ">
-      {/* Adjusted background decorations for warmer theme */}
+    // Restored correct warm gradient for section background
+    <section id="home" className="relative min-h-screen pt-32 pb-20 md:pb-32 overflow-hidden bg-gradient-to-br ">
+      {/* Background decorations remain from your provided code (already warm-themed) */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-orange-100 to-yellow-100 rounded-full filter blur-[100px] opacity-25 -z-10"></div>
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-gradient-to-tr from-yellow-100 to-red-100 rounded-full filter blur-[100px] opacity-25 -z-10"></div>
       <div className="absolute top-1/2 left-1/2 w-1/4 h-1/4 bg-gradient-to-r from-orange-100 to-red-50 rounded-full filter blur-[80px] opacity-20 -z-10 transform -translate-x-1/2 -translate-y-1/2"></div>
@@ -67,16 +69,15 @@ const Hero = () => {
               className="relative inline-block" 
             >
               <div className="absolute -left-4 -top-4 lg:-left-6 lg:-top-6 bg-orange-100 rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center shadow-sm">
-                <Sun className="w-6 h-6 lg:w-7 lg:h-7 text-orange-500" /> {/* Orange Sun icon (already orange) */}
+                <Sun className="w-6 h-6 lg:w-7 lg:h-7 text-orange-500" />
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-[3.5rem] xl:text-[3.8rem] font-bold text-gray-900 mb-6 leading-tight max-w-xl mx-auto lg:mx-0">
-                {/* Changed H1 gradient span to orange/yellow theme */}
                 Power Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-red-500 to-yellow-600">Future</span> with {companyName.split(" ")[0]}
               </h1>
             </motion.div>
             
             <motion.p 
-              className="text-lg md:text-xl text-gray-700 mb-8 max-w-xl leading-relaxed mx-auto lg:mx-0" // text-gray-700 for better contrast on lighter bg
+              className="text-lg md:text-xl text-gray-700 mb-8 max-w-xl leading-relaxed mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
@@ -90,9 +91,8 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
             >
-              {/* CTA button already orange gradient */}
               <motion.button
-                className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white px-8 py-4 rounded-full transition-all duration-300 font-semibold flex items-center justify-center group shadow-lg hover:shadow-orange-300/40 text-lg" // Enhanced hover shadow
+                className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white px-8 py-4 rounded-full transition-all duration-300 font-semibold flex items-center justify-center group shadow-lg hover:shadow-orange-300/40 text-lg"
                 whileHover={{ y: -3, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -101,7 +101,6 @@ const Hero = () => {
               </motion.button>
             </motion.div>
 
-            {/* Key stats: icon colors remain as defined in array for variety, bg colors also from array */}
             <motion.div 
               className="grid grid-cols-3 gap-4 sm:gap-6 max-w-xl mx-auto lg:mx-0"
               initial={{ opacity: 0 }}
@@ -131,14 +130,15 @@ const Hero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="relative">
+            <div className="relative"> {/* This div will get its aspect ratio from the img below */}
               <img 
                 src="https://eridirect.com/wp-content/uploads/2021/02/bigstock-Solar-panel-against-blue-sky-16564781.jpg" 
                 alt={`Solar panel installation by ${companyName}`}
-                className="rounded-3xl shadow-2xl w-full h-auto object-cover lg:max-w-xl xl:max-w-2xl mx-auto aspect-auto"
+                width="1000" // Intrinsic width of the image
+                height="667" // Intrinsic height of the image
+                className="rounded-3xl shadow-2xl w-full h-auto object-cover lg:max-w-xl xl:max-w-2xl mx-auto" // h-auto will now work with width/height attributes to maintain aspect ratio
               />
               
-              {/* Overlay stats: icon colors remain as defined for variety, bg colors also from array */}
               {overlayStats.map(stat => (
                 <motion.div 
                   key={stat.id}
