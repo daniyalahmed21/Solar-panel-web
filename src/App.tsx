@@ -1,0 +1,35 @@
+import Header from './components/Header';
+import Hero from './components/Hero';
+import Benefits from './components/Benefits';
+import Products from './components/Products';
+import HowItWorks from './components/HowItWorks';
+import Testimonials from './components/Testimonials';
+import ContactForm from './components/ContactForm';
+import Footer from './components/Footer';
+
+function App() {
+  return (
+    <div className="min-h-screen flex flex-col font-sans bg-gray-50 text-gray-800 antialiased">
+      {/* Header */}
+      <Header />
+      
+      {/* Main Content */}
+      <main className="flex-grow">
+        <Hero />
+        
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 space-y-20 md:space-y-28">
+          <Benefits />
+          <Products />
+          <HowItWorks />
+          <Testimonials />
+          <ContactForm />
+        </div>
+      </main>
+      
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
