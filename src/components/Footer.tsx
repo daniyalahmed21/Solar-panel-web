@@ -20,13 +20,13 @@ const Footer = () => {
           {/* 2. Use Link and pass state={null} for the logo/company name link */}
           <Link to="/" state={null} className="inline-flex flex-col items-center group mb-4">
             <div className="flex items-center justify-center">
-              <div className="bg-white rounded-full p-1 transform group-hover:scale-105 transition-transform duration-200 ease-in-out">
+              {/* <div className="bg-white rounded-full p-1 transform group-hover:scale-105 transition-transform duration-200 ease-in-out">
                 <img
                   src={logo}
                   className="h-12 w-12"
                   alt={`${companyName} Logo`}
                 />
-              </div>
+              </div> */}
               <span className="ml-3 text-3xl sm:text-4xl font-bold text-white group-hover:text-orange-400 transition-colors duration-200 ease-in-out">
                 {companyName}
               </span>

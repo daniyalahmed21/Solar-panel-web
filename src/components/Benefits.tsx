@@ -3,10 +3,9 @@ import { motion } from 'framer-motion';
 import { 
     DollarSign, Leaf, Shield, Home, BatteryCharging, 
     Landmark, ArrowRightLeft, Lock, ArrowRight,
-    ShieldCheck, Smartphone // Added new icons
+    ShieldCheck, Smartphone 
 } from 'lucide-react';
 
-// Updated and new benefit items relevant to Pakistan/Karachi (now 9 items)
 const benefitItems = [
   {
     title: 'Slash Energy Bills',
@@ -64,18 +63,18 @@ const benefitItems = [
     bgColor: 'bg-lime-100',
     borderColor: 'border-lime-500'
   },
-  { // NEW ITEM
+  { 
     title: 'Low Maintenance Systems',
     description: 'Our high-quality solar solutions, including advanced LiFePO4 batteries, require minimal maintenance, saving you time and effort.',
-    icon: ShieldCheck, // Icon for reliability and low maintenance
+    icon: ShieldCheck,
     color: 'text-slate-600',
     bgColor: 'bg-slate-100',
     borderColor: 'border-slate-500'
   },
-  { // NEW ITEM
+  { 
     title: 'Smart Energy Control',
     description: 'Monitor your energy production and consumption in real-time with our intuitive smart monitoring systems, often accessible via a mobile app.',
-    icon: Smartphone, // Icon for smart monitoring/app
+    icon: Smartphone,
     color: 'text-indigo-600',
     bgColor: 'bg-indigo-100',
     borderColor: 'border-indigo-500'
@@ -88,7 +87,8 @@ const Benefits = () => {
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.7, ease: [0.6, 0.01, -0.05, 0.95] } 
+      // Corrected ease function
+      transition: { duration: 0.7, ease: "easeOut" } 
     }
   };
 
@@ -97,14 +97,14 @@ const Benefits = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // Slightly adjusted stagger for 9 items
+        staggerChildren: 0.1, 
         delayChildren: 0.1 
       }
     }
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 40, scale: 0.95 }, // Adjusted entry animation
+    hidden: { opacity: 0, y: 40, scale: 0.95 }, 
     visible: {
       opacity: 1,
       y: 0,
@@ -128,10 +128,10 @@ const Benefits = () => {
   };
 
   return (
-    <section id="benefits" >
+    <section id="benefits" className="py-20 md:py-28"> {/* Added py-20 md:py-28 to section from your previous code */}
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
-          className="text-center  "
+          className="text-center mb-16 md:mb-20"
           initial="hidden"
           whileInView="visible"
           variants={sectionHeaderVariants}
@@ -146,7 +146,6 @@ const Benefits = () => {
         </motion.div>
 
         <motion.div 
-          // Grid columns adjusted for 9 items (3x3 on lg and wider)
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" 
           variants={gridContainerVariants}
           initial="hidden"
@@ -183,12 +182,12 @@ const Benefits = () => {
         </motion.div>
 
         <motion.div 
-          className=" text-center"
+          className="mt-16 md:mt-20 text-center"
           initial="hidden"
           whileInView="visible"
-          variants={sectionHeaderVariants}
+          variants={sectionHeaderVariants} // Reusing for consistency, adjust delay if needed
           viewport={{ once: true }}
-          transition={{delay: 0.3}}
+          transition={{delay: 0.3}} // Delay CTA slightly
         >
           <motion.button 
             className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white px-10 py-4 rounded-full transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-orange-300/50 flex items-center justify-center mx-auto group"
