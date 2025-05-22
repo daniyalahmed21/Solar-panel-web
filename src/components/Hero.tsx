@@ -47,7 +47,7 @@ const Hero = () => {
   ];
 
   return (
-    <section id="home" className="relative min-h-screen pt-32 pb-20 md:pb-32 overflow-x-hidden "> {/* Restored background gradient */}
+    <section id="home" className="relative min-h-screen pt-20 pb-20 md:pb-32 overflow-x-hidden "> {/* Restored background gradient */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-orange-100 to-yellow-100 rounded-full filter blur-[100px] opacity-25 -z-10"></div>
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-gradient-to-tr from-yellow-100 to-red-100 rounded-full filter blur-[100px] opacity-25 -z-10"></div>
       <div className="absolute top-1/2 left-1/2 w-1/4 h-1/4 bg-gradient-to-r from-orange-100 to-red-50 rounded-full filter blur-[80px] opacity-20 -z-10 transform -translate-x-1/2 -translate-y-1/2"></div>

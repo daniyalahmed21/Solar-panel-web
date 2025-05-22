@@ -26,7 +26,7 @@ function App() {
     <Router>
       <div className="min-h-screen flex flex-col font-sans bg-slate-50 text-gray-800 antialiased">
         <Header />
-        <main className="flex-grow">
+        <main className="flex-grow mt-8">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/faq" element={<FAQPage />} />

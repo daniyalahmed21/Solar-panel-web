@@ -9,12 +9,9 @@ import Testimonials from '../components/Testimonials';
 const LandingPage = () => {
   return (
     <div className="min-h-screen flex flex-col font-sans bg-gradient-to-br bg-white text-gray-800 antialiased">
-
-      {/* Main Content */}
       <main className="flex-grow">
         <Hero />
-        
-        <div className="max-w-6xl mx-auto   overflow-x-hidden  ">
+        <div className="max-w-6xl mx-auto overflow-x-hidden  ">
           <Benefits />
           <Products />
           <HowItWorks />

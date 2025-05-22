@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'; // Added AnimatePresence
 import { DollarSign, Zap, Thermometer, TrendingUp, Leaf, ArrowRight, Sun } from 'lucide-react';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 
-// Constants for calculation
 const PERCENTAGE_SAVING = 0.50;
 const AVG_COST_PER_KW_PKR = 160000; 
 const AVG_KWH_PRODUCTION_PER_KW_YEAR = 1750;
@@ -134,7 +131,6 @@ const SavingsCalculatorPage: React.FC = () => {
   ] : [];
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50">
       <main className="flex-grow">
         <section id="savings-calculator" className="py-20 md:py-28">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -262,7 +258,6 @@ const SavingsCalculatorPage: React.FC = () => {
           </div>
         </section>
       </main>
-    </div>
   );
 };
 
