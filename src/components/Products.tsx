@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ArrowRight, Package, BatteryCharging as BatteryIcon } from "lucide-react";
-
-
+import homeSolution from '../assets/home-solution.jpg';
+import batteryImage from '../assets/powerbank.jpg';
 // Placeholder images as per your last provided code
-const RESIDENTIAL_IMG_PLACEHOLDER = "src/assets/home-solution.jpg";
-const BATTERY_IMG_PLACEHOLDER = "src/assets/powerbank.jpg";
+const RESIDENTIAL_IMG_PLACEHOLDER = homeSolution;
+const BATTERY_IMG_PLACEHOLDER = batteryImage;
 
 // Updated productsData with owner's information and ATOM Power specs
 const productsData = [
