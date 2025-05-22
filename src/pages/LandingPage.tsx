@@ -14,7 +14,7 @@ const LandingPage = () => {
       <main className="flex-grow">
         <Hero />
         
-        <div className="max-w-6xl mx-auto  md:py-20 space-y-20 overflow-x-hidden  ">
+        <div className="max-w-6xl mx-auto   overflow-x-hidden  ">
           <Benefits />
           <Products />
           <HowItWorks />

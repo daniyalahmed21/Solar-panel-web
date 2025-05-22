@@ -128,10 +128,10 @@ const Benefits = () => {
   };
 
   return (
-    <section id="benefits" className="py-20 md:py-28">
+    <section id="benefits" >
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
-          className="text-center mb-16 md:mb-20"
+          className="text-center  "
           initial="hidden"
           whileInView="visible"
           variants={sectionHeaderVariants}
@@ -183,7 +183,7 @@ const Benefits = () => {
         </motion.div>
 
         <motion.div 
-          className="mt-16 md:mt-20 text-center"
+          className=" text-center"
           initial="hidden"
           whileInView="visible"
           variants={sectionHeaderVariants}
