@@ -184,14 +184,14 @@ const Products = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.4 + (activeProduct.features.length * 0.07) }}
                     >
-                      <motion.button 
+                      {/* <motion.button 
                         className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white px-8 py-3 rounded-lg transition-all duration-300 font-semibold shadow-lg hover:shadow-orange-300/50 flex items-center text-base md:text-lg group"
                         whileHover={{ y: -3, scale: 1.03 }}
                         whileTap={{ scale: 0.97 }}
                       >
                         Learn More
                         <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                      </motion.button>
+                      </motion.button> */}
                     </motion.div>
                   </div>
                 </motion.div>

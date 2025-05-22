@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.svg';
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const companyName = "SUNFINITY";
   const primaryPhoneNumber = "+923333746752";
@@ -21,15 +23,53 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    // Scroll to top on route change
+    window.scrollTo(0, 0);
+    
+    // Handle scroll to section if coming from another page
+    if (location.state?.scrollTo) {
+      const section = document.querySelector(location.state.scrollTo);
+      if (section) {
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }, 100); // Small delay to allow page to render
+      }
+    }
+  }, [location.pathname, location.state]);
+
   const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Benefits', href: '#benefits' },
-    { name: 'Products', href: '#products' },
-    { name: 'Our Process', href: '#process' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'FAQ', href: '/faq' },
-    { name: 'Contact Us', href: '/contact' },
+    { name: 'Home', href: '/', isHash: false, homePageOnly: false },
+    { name: 'Benefits', href: '#benefits', isHash: true, homePageOnly: true },
+    { name: 'Products', href: '#products', isHash: true, homePageOnly: true },
+    { name: 'Our Process', href: '#process', isHash: true, homePageOnly: true },
+    { name: 'Testimonials', href: '#testimonials', isHash: true, homePageOnly: true },
+    { name: 'FAQ', href: '/faq', isHash: false, homePageOnly: false },
+    { name: 'Contact Us', href: '/contact', isHash: false, homePageOnly: false },
   ];
+
+  const filteredNavItems = navItems.filter(item => 
+    !item.homePageOnly || location.pathname === '/'
+  );
+
+  const handleNavigation = (href, isHash) => {
+    if (isHash) {
+      // If we're not on the home page, navigate there first
+      if (location.pathname !== '/') {
+        navigate('/', { state: { scrollTo: href } });
+      } else {
+        // For hash links, scroll to the section
+        const section = document.querySelector(href);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else {
+      // For regular links, navigate to the page
+      navigate(href);
+    }
+    closeMobileMenu();
+  };
 
   const closeMobileMenu = () => setIsMenuOpen(false);
   const handleGetQuoteClick = () => {
@@ -38,7 +78,7 @@ const Header = () => {
   };
 
   const MotionLink = motion(Link);
-  const MotionA = motion.a;
+  const MotionButton = motion.button;
 
   return (
     <motion.header
@@ -69,33 +109,19 @@ const Header = () => {
           </Link>
 
           <div className="hidden lg:flex items-center space-x-7">
-            {navItems.map((item) =>
-              item.href.startsWith('#') ? (
-                <MotionA
-                  key={item.name}
-                  href={item.href}
-                  className={`font-medium transition-colors duration-200 ${
-                    isScrolled ? 'text-gray-700 hover:text-orange-600' : 'text-gray-800 hover:text-orange-600'
-                  }`}
-                  whileHover={{ y: -2.5 }}
-                  whileTap={{ y: 0 }}
-                >
-                  {item.name}
-                </MotionA>
-              ) : (
-                <MotionLink
-                  key={item.name}
-                  to={item.href}
-                  className={`font-medium transition-colors duration-200 ${
-                    isScrolled ? 'text-gray-700 hover:text-orange-600' : 'text-gray-800 hover:text-orange-600'
-                  }`}
-                  whileHover={{ y: -2.5 }}
-                  whileTap={{ y: 0 }}
-                >
-                  {item.name}
-                </MotionLink>
-              )
-            )}
+            {filteredNavItems.map((item) => (
+              <MotionButton
+                key={item.name}
+                onClick={() => handleNavigation(item.href, item.isHash)}
+                className={`font-medium transition-colors duration-200 ${
+                  isScrolled ? 'text-gray-700 hover:text-orange-600' : 'text-gray-800 hover:text-orange-600'
+                }`}
+                whileHover={{ y: -2.5 }}
+                whileTap={{ y: 0 }}
+              >
+                {item.name}
+              </MotionButton>
+            ))}
             <div className="flex items-center space-x-5 ml-5">
               <motion.a
                 href={`tel:${primaryPhoneNumber}`}
@@ -142,27 +168,15 @@ const Header = () => {
               className="lg:hidden overflow-hidden border-t border-gray-100 mt-2.5"
             >
               <div className="py-3 flex flex-col space-y-1.5">
-                {navItems.map((item) =>
-                  item.href.startsWith('#') ? (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="block font-medium text-gray-700 hover:text-orange-600 py-3 px-3 rounded-lg transition-colors duration-200"
-                      onClick={closeMobileMenu}
-                    >
-                      {item.name}
-                    </a>
-                  ) : (
-                    <Link
-                      key={item.name}
-                      to={item.href}
-                      className="block font-medium text-gray-700 hover:text-orange-600 py-3 px-3 rounded-lg transition-colors duration-200"
-                      onClick={closeMobileMenu}
-                    >
-                      {item.name}
-                    </Link>
-                  )
-                )}
+                {filteredNavItems.map((item) => (
+                  <button
+                    key={item.name}
+                    onClick={() => handleNavigation(item.href, item.isHash)}
+                    className="block text-left font-medium text-gray-700 hover:text-orange-600 py-3 px-3 rounded-lg transition-colors duration-200"
+                  >
+                    {item.name}
+                  </button>
+                ))}
                 <div className="pt-5 space-y-3.5 px-3">
                   <a
                     href={`tel:${primaryPhoneNumber}`}
