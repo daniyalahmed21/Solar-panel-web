@@ -14,7 +14,7 @@ const Header = () => {
   const primaryPhoneNumber = "+923333746752";
   const primaryPhoneNumberDisplay = "+92 333-3746752";
 
-  // Throttle scroll handler for better performance
+  // Throttled scroll handler
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
     const handleScroll = () => {
@@ -30,26 +30,42 @@ const Header = () => {
     };
   }, []);
 
-  // Navigation and scroll handling
+  // Handle scroll to sections and top
   useEffect(() => {
-    if (!location.hash && !location.state?.scrollTo) {
-      window.scrollTo(0, 0);
-    }
-
-    if (location.state?.scrollTo) {
-      const sectionId = location.state.scrollTo;
+    const scrollToSection = (sectionId: string) => {
       const section = document.querySelector(sectionId);
       if (section) {
-        const timeout = setTimeout(() => {
+        setTimeout(() => {
           section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          navigate(location.pathname, { replace: true, state: {} });
         }, 100);
-        return () => clearTimeout(timeout);
+        return true;
+      }
+      return false;
+    };
+
+    if (location.hash) {
+      // Handle direct URL access with hash
+      if (scrollToSection(location.hash)) {
+        // Clean up the URL after scrolling
+        setTimeout(() => {
+          navigate(location.pathname, { replace: true });
+        }, 1000);
+      }
+    } else if (location.state?.scrollTo) {
+      // Handle navigation from other pages with state
+      if (scrollToSection(location.state.scrollTo)) {
+        // Clean up the state after scrolling
+        setTimeout(() => {
+          navigate(location.pathname, { replace: true, state: {} });
+        }, 1000);
       } else {
         navigate(location.pathname, { replace: true, state: {} });
       }
+    } else {
+      // Default scroll to top for new pages
+      window.scrollTo(0, 0);
     }
-  }, [location.pathname, location.state, navigate]);
+  }, [location.pathname, location.hash, location.state, navigate]);
 
   const navItems = [
     { name: 'Home', href: '/', isHash: false, homePageOnly: false },
@@ -80,7 +96,11 @@ const Header = () => {
       } else {
         const section = document.querySelector(href);
         if (section) {
-          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setTimeout(() => {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Update URL without reload
+            window.history.replaceState({}, '', href);
+          }, 50);
         }
       }
     } else {
