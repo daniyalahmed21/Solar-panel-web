@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ArrowRight, Package, BatteryCharging as BatteryIcon } from "lucide-react";
 
+
 // Placeholder images as per your last provided code
 const RESIDENTIAL_IMG_PLACEHOLDER = "src/assets/home-solution.jpg";
 const BATTERY_IMG_PLACEHOLDER = "src/assets/powerbank.jpg";

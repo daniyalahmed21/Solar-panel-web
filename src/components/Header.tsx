@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import logo from '../assets/logo.svg';
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,7 +53,7 @@ const Header = () => {
         <nav className="flex justify-between items-center">
           <Link to="/" className="flex items-center">
             <motion.img
-              src="src/assets/logo.svg"
+              src={logo}
               className="h-14 w-14"
               alt={`${companyName} Logo`}
               whileHover={{ scale: 1.05 }}

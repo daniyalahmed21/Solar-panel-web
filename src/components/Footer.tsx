@@ -1,3 +1,4 @@
+import logo from '../assets/logo.svg';
 
 const Footer = () => {
   const companyName = "SUNFINITY";
@@ -18,7 +19,7 @@ const Footer = () => {
         <div className="mb-10">
           <div className="flex items-center justify-center mb-4 ">
             <div className='bg-white rounded-full  object-cover'>
-            <img src="src/assets/logo.svg" className='h-14 w-14' alt="" />
+            <img src={logo} className='h-14 w-14' alt="" />
 
             </div>
             <span className="ml-3 text-4xl font-bold text-white">{companyName}</span> 
