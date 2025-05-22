@@ -104,7 +104,7 @@ const ContactForm = () => {
 
 
   return (
-    <section id="contact" className="py-20 md:py-28 ">
+    <section id="contact" className="py-20 md:py-28 mt-5">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
           className="text-center mb-16 md:mb-20"

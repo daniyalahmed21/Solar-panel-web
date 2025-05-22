@@ -158,7 +158,7 @@ const FAQItem = ({ question, answer }: { question: string; answer: string | JSX.
 
 const FAQPage = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50"> {/* Consistent light background */}
+    <div className="flex flex-col mt-5 min-h-screen bg-gray-50"> {/* Consistent light background */}
       <main className="flex-grow">
         <section id="faq" className="py-20 md:py-28">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
