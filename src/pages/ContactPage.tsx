@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-// Removed Facebook, Twitter, Instagram, Youtube as they are no longer used in this component
 import { Send, Phone, Mail, MapPin, Check } from 'lucide-react'; 
 
 type FormData = {
@@ -13,7 +12,6 @@ type FormData = {
   contactPreference: string;
 };
 
-// SUNFINITY SOLAR ENERGY Contact Information (socials array kept for potential use elsewhere, but not rendered here)
 const companyContact = {
   phoneDisplay: "+92 333 3746752", // A. Qadir Gillani
   phoneLink: "tel:+923333746752",
@@ -21,12 +19,6 @@ const companyContact = {
   email: "info@sunfinitysolar.pk", // Placeholder email
   addressLine1: "R-1500, Samanabad, F.B. Area Block 18",
   addressLine2: "Gulberg Town, Karachi, Pakistan",
-  socials: [ // This array is defined but will not be used in this component's render
-    { name: "Facebook", icon: "Facebook", href: "#" }, 
-    { name: "Twitter", icon: "Twitter", href: "#" },
-    { name: "Instagram", icon: "Instagram", href: "#" },
-    { name: "Youtube", icon: "Youtube", href: "#" },
-  ]
 };
 
 const ContactForm = () => {

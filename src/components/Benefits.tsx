@@ -1,7 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { DollarSign, Leaf, Shield, Home, BatteryCharging, Landmark, ArrowRightLeft, Lock, ArrowRight } from 'lucide-react';
+import { 
+    DollarSign, Leaf, Shield, Home, BatteryCharging, 
+    Landmark, ArrowRightLeft, Lock, ArrowRight,
+    ShieldCheck, Smartphone // Added new icons
+} from 'lucide-react';
 
+// Updated and new benefit items relevant to Pakistan/Karachi (now 9 items)
 const benefitItems = [
   {
     title: 'Slash Energy Bills',
@@ -58,6 +63,22 @@ const benefitItems = [
     color: 'text-lime-600',
     bgColor: 'bg-lime-100',
     borderColor: 'border-lime-500'
+  },
+  { // NEW ITEM
+    title: 'Low Maintenance Systems',
+    description: 'Our high-quality solar solutions, including advanced LiFePO4 batteries, require minimal maintenance, saving you time and effort.',
+    icon: ShieldCheck, // Icon for reliability and low maintenance
+    color: 'text-slate-600',
+    bgColor: 'bg-slate-100',
+    borderColor: 'border-slate-500'
+  },
+  { // NEW ITEM
+    title: 'Smart Energy Control',
+    description: 'Monitor your energy production and consumption in real-time with our intuitive smart monitoring systems, often accessible via a mobile app.',
+    icon: Smartphone, // Icon for smart monitoring/app
+    color: 'text-indigo-600',
+    bgColor: 'bg-indigo-100',
+    borderColor: 'border-indigo-500'
   }
 ];
 
@@ -76,28 +97,27 @@ const Benefits = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15, // Slightly increased stagger for cards
-        delayChildren: 0.1 // Small delay before first card starts
+        staggerChildren: 0.1, // Slightly adjusted stagger for 9 items
+        delayChildren: 0.1 
       }
     }
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 50, scale: 0.9 }, // Card starts further down and smaller
+    hidden: { opacity: 0, y: 40, scale: 0.95 }, // Adjusted entry animation
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
       transition: { 
         type: "spring", 
-        stiffness: 90, // Adjusted spring
+        stiffness: 90, 
         damping: 16,
-        staggerChildren: 0.05 // Stagger children within the card
+        staggerChildren: 0.05 
       }
     }
   };
 
-  // Variants for elements inside each card
   const cardChildIconVariants = {
     hidden: { opacity: 0, scale: 0.5 },
     visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 150, damping: 10, duration: 0.4 } }
@@ -107,9 +127,8 @@ const Benefits = () => {
     visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } }
   };
 
-
   return (
-    <section id="benefits" className="px-4 overflow-hidden ">
+    <section id="benefits" className="py-20 md:py-28">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div 
           className="text-center mb-16 md:mb-20"
@@ -127,7 +146,8 @@ const Benefits = () => {
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          // Grid columns adjusted for 9 items (3x3 on lg and wider)
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" 
           variants={gridContainerVariants}
           initial="hidden"
           whileInView="visible"
@@ -136,25 +156,25 @@ const Benefits = () => {
           {benefitItems.map((item) => (
             <motion.div 
               key={item.title}
-              variants={cardVariants} // Card animates using cardVariants
+              variants={cardVariants}
               className={`bg-white rounded-2xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300 border-gray-200/70 border border-t-4 ${item.borderColor} flex flex-col h-full`}
               whileHover={{ y: -10, scale: 1.03, transition: {type: "spring", stiffness:300, damping:10} }}
             >
-              <motion.div // Icon container now a motion component
+              <motion.div 
                 className={`${item.bgColor} rounded-lg w-16 h-16 flex items-center justify-center mb-6 self-start shadow`}
-                variants={cardChildIconVariants} // Animates with icon variants
+                variants={cardChildIconVariants}
               >
                 <item.icon className={`w-8 h-8 ${item.color}`} />
               </motion.div>
-              <motion.h3 // Title now a motion component
+              <motion.h3 
                 className="text-xl font-semibold text-gray-800 mb-3"
-                variants={cardChildTextVariants} // Animates with text variants
+                variants={cardChildTextVariants}
               >
                 {item.title}
               </motion.h3>
-              <motion.p // Description now a motion component
+              <motion.p 
                 className="text-gray-600 text-base flex-grow leading-relaxed"
-                variants={cardChildTextVariants} // Animates with text variants (will inherit stagger delay or apply its own)
+                variants={cardChildTextVariants}
               >
                 {item.description}
               </motion.p>
@@ -164,11 +184,11 @@ const Benefits = () => {
 
         <motion.div 
           className="mt-16 md:mt-20 text-center"
-          initial="hidden" // Use variants for consistency
+          initial="hidden"
           whileInView="visible"
-          variants={sectionHeaderVariants} // Can reuse sectionHeaderVariants or create a specific one
+          variants={sectionHeaderVariants}
           viewport={{ once: true }}
-          transition={{delay: 0.3}} // Delay CTA slightly after cards might have started
+          transition={{delay: 0.3}}
         >
           <motion.button 
             className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white px-10 py-4 rounded-full transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-orange-300/50 flex items-center justify-center mx-auto group"

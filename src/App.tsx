@@ -1,34 +1,24 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import Benefits from './components/Benefits';
-import Products from './components/Products';
-import HowItWorks from './components/HowItWorks';
-import Testimonials from './components/Testimonials';
-import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
-
+import LandingPage from './pages/LandingPage'; 
+import FAQPage from './pages/FAQPage';      
+import ContactForm from './pages/ContactPage';
 function App() {
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-gradient-to-br bg-white text-gray-800 antialiased">
-      {/* Header */}
-      <Header />
-      
-      {/* Main Content */}
-      <main className="flex-grow">
-        <Hero />
-        
-        <div className="max-w-6xl mx-auto  md:py-20 space-y-20 overflow-x-hidden  ">
-          <Benefits />
-          <Products />
-          <HowItWorks />
-          <Testimonials />
-          <ContactForm />
-        </div>
-      </main>
-      
-      {/* Footer */}
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen flex flex-col font-sans bg-slate-50 text-gray-800 antialiased">
+        <Header /> 
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/contact" element={<ContactForm />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

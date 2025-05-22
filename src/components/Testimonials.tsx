@@ -7,6 +7,7 @@ import {
   Quote,
   ArrowRight,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const testimonials = [
   {
@@ -223,6 +224,9 @@ const Testimonials = () => {
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
               Experience the SUNFINITY difference with our premium solar solutions and expert installation across Pakistan.
             </p>
+
+            <Link to="/contact">
+            
             <motion.button
               className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white px-10 py-4 rounded-full transition-all duration-300 font-semibold shadow-lg hover:shadow-orange-300/50 flex items-center mx-auto text-lg group"
               whileHover={{ y: -3, scale: 1.02 }}
@@ -231,6 +235,8 @@ const Testimonials = () => {
               Get Your Free Quote
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </motion.button>
+            </Link>
+
           </div>
         </motion.div>
       </div>

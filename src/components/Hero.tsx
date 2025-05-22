@@ -1,20 +1,20 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Sun, Shield, DollarSign, Zap, Wrench } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const companyName = "SUNFINITY SOLAR ENERGY";
   const tagline = "A brighter tomorrow, starts today!";
-  // Ensuring heroParagraph reflects latest info (full projects, warranty support)
   const heroParagraph = `Your trusted partner for complete solar projects in Pakistan – from high-quality panels, inverters, and batteries to expert installation and dedicated warranty support. ${tagline}`;
 
-  // keyStats updated with LATEST owner-provided information
+  // keyStats updated with the latest owner-provided information
   const keyStats = [
-    { icon: <DollarSign className="w-6 h-6 text-green-600" />, value: "Avg 50%", label: "Bill Reduction", bg: "bg-green-100" },
-    { icon: <Shield className="w-6 h-6 text-blue-600" />, value: "10 Year", label: "Panel Warranty", bg: "bg-blue-100" },
+    { icon: <DollarSign className="w-6 h-6 text-green-600" />, value: "Avg. 50%", label: "Bill Reduction", bg: "bg-green-100" },
+    { icon: <Shield className="w-6 h-6 text-blue-600" />, value: "10-Year", label: "Panel Warranty", bg: "bg-blue-100" },
     { icon: <Wrench className="w-6 h-6 text-orange-600" />, value: "Expert", label: "Installation", bg: "bg-orange-100" }
   ];
 
-  // overlayStats updated with LATEST owner-provided information
+  // overlayStats updated with the latest owner-provided information
   const overlayStats = [
     {
       id: 1,
@@ -29,7 +29,7 @@ const Hero = () => {
       id: 2,
       icon: <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />,
       label: "Panel Lifespan", // Distinct from warranty
-      value: "10+ Years",    // Panel's expected operational life
+      value: "10+ Years",    // Corrected to typical panel operational life
       bgColor: "bg-blue-100",
       positionClasses: "-top-6 -right-6",
       delay: 1.2
@@ -46,9 +46,7 @@ const Hero = () => {
   ];
 
   return (
-    // Restored correct warm gradient for section background
     <section id="home" className="relative min-h-screen pt-32 pb-20 md:pb-32 overflow-x-hidden bg-gradient-to-br ">
-      {/* Background decorations remain from your provided code (already warm-themed) */}
       <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-orange-100 to-yellow-100 rounded-full filter blur-[100px] opacity-25 -z-10"></div>
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-gradient-to-tr from-yellow-100 to-red-100 rounded-full filter blur-[100px] opacity-25 -z-10"></div>
       <div className="absolute top-1/2 left-1/2 w-1/4 h-1/4 bg-gradient-to-r from-orange-100 to-red-50 rounded-full filter blur-[80px] opacity-20 -z-10 transform -translate-x-1/2 -translate-y-1/2"></div>
@@ -68,9 +66,6 @@ const Hero = () => {
               transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
               className="relative inline-block" 
             >
-              <div className="absolute -left-4 -top-4 lg:-left-6 lg:-top-6 bg-orange-100 rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center shadow-sm">
-                <Sun className="w-6 h-6 lg:w-7 lg:h-7 text-orange-500" />
-              </div>
               <h1 className="text-4xl sm:text-5xl md:text-[3.5rem] xl:text-[3.8rem] font-bold text-gray-900 mb-6 leading-tight max-w-xl mx-auto lg:mx-0">
                 Power Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-red-500 to-yellow-600">Future</span> with {companyName.split(" ")[0]}
               </h1>
@@ -84,6 +79,8 @@ const Hero = () => {
             >
               {heroParagraph}
             </motion.p>
+            
+            <Link to="/contact">
             
             <motion.div 
               className="flex flex-col sm:flex-row gap-4 mb-12 justify-center lg:justify-start"
@@ -100,6 +97,7 @@ const Hero = () => {
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </motion.button>
             </motion.div>
+            </Link>
 
             <motion.div 
               className="grid grid-cols-3 gap-4 sm:gap-6 max-w-xl mx-auto lg:mx-0"
@@ -130,13 +128,13 @@ const Hero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="relative"> {/* This div will get its aspect ratio from the img below */}
+            <div className="relative">
               <img 
                 src="https://eridirect.com/wp-content/uploads/2021/02/bigstock-Solar-panel-against-blue-sky-16564781.jpg" 
                 alt={`Solar panel installation by ${companyName}`}
-                width="1000" // Intrinsic width of the image
-                height="667" // Intrinsic height of the image
-                className="rounded-3xl shadow-2xl w-full h-auto object-cover lg:max-w-xl xl:max-w-2xl mx-auto" // h-auto will now work with width/height attributes to maintain aspect ratio
+                width="1000" 
+                height="667" 
+                className="rounded-3xl shadow-2xl w-full h-auto object-cover lg:max-w-xl xl:max-w-2xl mx-auto"
               />
               
               {overlayStats.map(stat => (

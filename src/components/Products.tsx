@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from "react"; // Added useEffect, useRef
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ArrowRight, Package, BatteryCharging as BatteryIcon } from "lucide-react";
 
-// Placeholder images
-const RESIDENTIAL_IMG_PLACEHOLDER = "https://placehold.co/600x400/E2E8F0/4A5568?text=Home+Solar";
-const BATTERY_IMG_PLACEHOLDER = "https://placehold.co/600x400/E2E8F0/4A5568?text=Solar+Battery";
+// Placeholder images as per your last provided code
+const RESIDENTIAL_IMG_PLACEHOLDER = "src/assets/home-solution.jpg";
+const BATTERY_IMG_PLACEHOLDER = "src/assets/powerbank.jpg";
 
+// Updated productsData with owner's information and ATOM Power specs
 const productsData = [
   {
     id: 1,
@@ -24,21 +25,28 @@ const productsData = [
   },
   {
     id: 3, 
-    name: "SUNFINITY PowerBank",
+    name: "SUNFINITY PowerBank", // Assuming this is based on/similar to ATOM Power
     icon: BatteryIcon,
-    description: "Advanced battery storage for uninterrupted power, ensuring energy security during K-Electric outages.",
+    description: "Advanced LiFePO4 battery storage for uninterrupted power, ensuring energy security during K-Electric outages. Features technology made in Pakistan.", // Highlight LiFePO4 & origin
     image: BATTERY_IMG_PLACEHOLDER,
     features: [
-      "Various capacities available (e.g., 200Ah, 300Ah options)",
-      "Provides approx. 4 hours backup on typical full load",
-      "Seamless power transition during outages",
-      "Smart energy management for optimal use",
-      "Compact design with professional installation",
-      "10-Year Battery Warranty",
+      "Advanced LiFePO4 Technology ", // Atom Power PDF
+      "Capacities like 2.56kWh & 5.12kWh available ", // Atom Power PDF
+      "Long Cycle Life (6000+ cycles @0.5C, 70% EOL) ", // Atom Power PDF
+      "Provides approx. 4 hours backup on typical full load", // Owner info, consistent with battery specs
+      "Advanced Battery Management System (BMS) ", // Atom Power PDF
+      "Interactive LCD Screen for on-site data ", // Atom Power PDF
+      "Remote WiFi Monitoring via online dashboard ", // Atom Power PDF
+      "High Depth of Discharge (~90%) ", // Atom Power PDF
+      "Flexible Mounting (Wall & Table-Top)", // Atom Power PDF
+      "5-Year Local Warranty (backed by ATOM Power) ", // CRITICAL UPDATE from ATOM Power PDF
+      "Zero Maintenance & Environmentally Friendly ", // Atom Power PDF
+      "Parallel connection for future capacity expansion ", // Atom Power PDF
     ],
   },
 ];
 
+// whyChooseSunfinity remains highly relevant
 const whyChooseSunfinity = [
   "Top-Tier, High-Efficiency Solar Technology",
   "Expertly Engineered for Pakistani Climate",
@@ -52,21 +60,18 @@ const whyChooseSunfinity = [
 const Products = () => {
   const [activeProduct, setActiveProduct] = useState(productsData.length > 0 ? productsData[0] : null);
   
-  // Refs for scrolling logic
   const showcaseRef = useRef<HTMLDivElement>(null);
   const isInitialMount = useRef(true);
 
   useEffect(() => {
     if (isInitialMount.current) {
-      isInitialMount.current = false; // Set to false after initial mount
+      isInitialMount.current = false; 
     } else if (showcaseRef.current) {
-      // Only scroll on smaller screens where layout is stacked
-      if (window.innerWidth < 1024) { // Tailwind's default lg breakpoint
-        // Smooth scroll to the top of the showcase area
+      if (window.innerWidth < 1024) { 
         showcaseRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-  }, [activeProduct]); // Trigger effect when activeProduct changes
+  }, [activeProduct]);
 
 
   const cardVariants = {
@@ -80,7 +85,7 @@ const Products = () => {
   }
 
   return (
-    <section id="products" className="py-20 md:py-28"> {/* Section background as per your provided code (inherits page default) */}
+    <section id="products" className="py-20 md:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16 md:mb-20"
@@ -100,7 +105,7 @@ const Products = () => {
         <div className="flex flex-col lg:flex-row gap-10 xl:gap-16">
           {/* Product Showcase */}
           <motion.div
-            ref={showcaseRef} // Added ref for scrolling
+            ref={showcaseRef}
             className="w-full lg:w-[55%]"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -215,7 +220,7 @@ const Products = () => {
                           ? "bg-orange-500 text-white border-orange-600 shadow-lg"
                           : "bg-white hover:bg-gray-100 border-gray-200 hover:border-gray-300"
                       }`}
-                    onClick={() => setActiveProduct(product)} // setActiveProduct will trigger the useEffect
+                    onClick={() => setActiveProduct(product)}
                     whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
                     whileTap={{ scale: 0.98 }}
                   >
